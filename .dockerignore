@@ -1,0 +1,11 @@
+node_modules
+dist
+server/data
+server/.env
+.git
+.claude
+*.md
+.gitignore
+.dockerignore
+Dockerfile
+fly.toml

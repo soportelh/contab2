@@ -1,0 +1,35 @@
+# fly.toml app configuration file generated for contab2-chile on 2026-07-27T17:50:49-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'contab2-chile'
+primary_region = 'gru'
+
+[build]
+[env]
+  PORT = '4000'
+
+[[mounts]]
+  source = 'contab2_data'
+  destination = '/app/server/data'
+
+[http_service]
+  internal_port = 4000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [[http_service.checks]]
+    interval = '30s'
+    timeout = '5s'
+    grace_period = '10s'
+    method = 'GET'
+    path = '/api/health'
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 1024
